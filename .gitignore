@@ -1,0 +1,9 @@
+service-host/src/generated/prisma
+service-host/node_modules/
+service-host/dist/
+service-host/.env
+service-host/dev.db
+service-host/dev.db-journal
+front-end/node_modules/
+front-end/dist/
+

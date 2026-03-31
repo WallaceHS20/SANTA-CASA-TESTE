@@ -1,0 +1,20 @@
+2026-03-31 08:18:57 [info]: Chamada recebida: PATCH /customers/1
+2026-03-31 08:18:57 [info]: [UPDATE] Tentativa de atualização para o ID: 1
+2026-03-31 08:18:57 [info]: [UPDATE] Cliente ID: 1 atualizado com sucesso.
+2026-03-31 08:19:33 [info]: Chamada recebida: PATCH /customers/19
+2026-03-31 08:19:33 [info]: [UPDATE] Tentativa de atualização para o ID: 19
+2026-03-31 08:19:33 [error]: [UPDATE] Erro: Cliente 19 inexistente.
+2026-03-31 09:12:15 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:12:15 [info]: [CREATE] Iniciando criação para o cliente: undefined
+2026-03-31 09:17:03 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:17:03 [info]: [CREATE] Iniciando criação para o cliente: João Silva
+2026-03-31 09:17:03 [error]: [CREATE] Erro: Documento '11122233344' inválido.
+2026-03-31 09:18:04 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:18:04 [info]: [CREATE] Iniciando criação para o cliente: undefined
+2026-03-31 09:18:49 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:18:49 [info]: [CREATE] Iniciando criação para o cliente: Maria Oliveira
+2026-03-31 09:18:49 [error]: [CREATE] Erro: Documento '52998224025' inválido.
+2026-03-31 09:19:16 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:23:21 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:24:08 [info]: Chamada recebida: POST /customers/
+2026-03-31 09:28:36 [info]: Chamada recebida: POST /customers/

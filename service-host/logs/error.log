@@ -1,0 +1,5 @@
+2026-03-31 09:44:54 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '85202613043' inválido.
+2026-03-31 09:47:58 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '852302613043' inválido.
+2026-03-31 09:48:25 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '63398007092' inválido.
+2026-03-31 09:59:19 [error]: [UPDATE] Erro na atualização do ID 3: Cliente não encontrado para atualização.
+2026-03-31 09:59:49 [error]: [REMOVE] Erro ao excluir cliente 999: Não foi possível excluir: Cliente inexistente.

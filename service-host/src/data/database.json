@@ -1,0 +1,183 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "João Silva",
+      "email": "joao@email.com",
+      "taxId": "11111111111",
+      "registrationDate": "2023-01-10T08:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Maria Oliveira",
+      "email": "maria@email.com",
+      "taxId": "22222222222",
+      "registrationDate": "2023-02-14T10:15:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Pedro Santos ME",
+      "email": "pedro@email.com",
+      "taxId": "33333333000133",
+      "registrationDate": "2023-03-05T14:20:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Ana Costa",
+      "email": "ana@email.com",
+      "taxId": null,
+      "registrationDate": "2023-04-20T09:45:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Lucas Pereira",
+      "email": "lucas@email.com",
+      "taxId": "55555555555",
+      "registrationDate": "2023-05-12T11:00:00Z"
+    },
+    {
+      "id": 6,
+      "name": "Juliana Lima Comércio Ltda",
+      "email": "juliana@email.com",
+      "taxId": "66666666000166",
+      "registrationDate": "2023-06-18T16:30:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Marcos Souza",
+      "email": "marcos@email.com",
+      "taxId": "77777777777",
+      "registrationDate": "2023-07-22T13:10:00Z"
+    },
+    {
+      "id": 8,
+      "name": "Beatriz Rocha & Cia",
+      "email": "beatriz@email.com",
+      "taxId": "88888888000188",
+      "registrationDate": "2023-08-01T08:00:00Z"
+    },
+    {
+      "id": 9,
+      "name": "Ricardo Alves",
+      "email": "ricardo@email.com",
+      "taxId": "99999999999",
+      "registrationDate": "2023-09-09T15:45:00Z"
+    },
+    {
+      "id": 10,
+      "name": "Fernanda Mendes Tech",
+      "email": "fernanda@email.com",
+      "taxId": null,
+      "registrationDate": "2023-09-25T10:05:00Z"
+    }
+  ],
+
+  "products": [
+    { "id": 1, "name": "Teclado Mecânico RGB", "price": 350.0, "stock": 15 },
+    { "id": 2, "name": "Mouse Gamer 16000 DPI", "price": 220.0, "stock": 25 },
+    { "id": 3, "name": "Monitor 24' IPS 144Hz", "price": 1100.0, "stock": 8 },
+    { "id": 4, "name": "Headset 7.1 Wireless", "price": 450.0, "stock": 12 },
+    { "id": 5, "name": "Cadeira Ergonômica", "price": 980.0, "stock": 5 },
+    { "id": 6, "name": "Webcam 1080p 60fps", "price": 320.0, "stock": 20 },
+    {
+      "id": 7,
+      "name": "Microfone Condensador USB",
+      "price": 280.0,
+      "stock": 10
+    },
+    { "id": 8, "name": "Mousepad XL Speed", "price": 80.0, "stock": 50 },
+    {
+      "id": 9,
+      "name": "Suporte de Monitor Articulado",
+      "price": 190.0,
+      "stock": 18
+    },
+    { "id": 10, "name": "Cabo HDMI 2.1 2m", "price": 65.0, "stock": 100 }
+  ],
+
+  "transactions": [
+    {
+      "id": 1,
+      "customerId": 1,
+      "type": "SALE",
+      "totalAmount": 570.0,
+      "date": "2023-10-01T10:00:00Z",
+      "items": [
+        { "productId": 1, "quantity": 1 },
+        { "productId": 2, "quantity": 1 }
+      ]
+    },
+    {
+      "id": 2,
+      "customerId": 3,
+      "type": "SALE",
+      "totalAmount": 1100.0,
+      "date": "2023-10-01T14:30:00Z",
+      "items": [{ "productId": 3, "quantity": 1 }]
+    },
+    {
+      "id": 3,
+      "customerId": 5,
+      "type": "PURCHASE",
+      "totalAmount": 1500.0,
+      "date": "2023-10-02T09:15:00Z",
+      "items": [{ "productId": 10, "quantity": 20 }]
+    },
+    {
+      "id": 4,
+      "customerId": 2,
+      "type": "SALE",
+      "totalAmount": 450.0,
+      "date": "2023-10-02T16:45:00Z",
+      "items": [{ "productId": 4, "quantity": 1 }]
+    },
+    {
+      "id": 5,
+      "customerId": 8,
+      "type": "SALE",
+      "totalAmount": 160.0,
+      "date": "2023-10-03T11:20:00Z",
+      "items": [{ "productId": 8, "quantity": 2 }]
+    },
+    {
+      "id": 6,
+      "customerId": 10,
+      "type": "SALE",
+      "totalAmount": 980.0,
+      "date": "2023-10-03T15:10:00Z",
+      "items": [{ "productId": 5, "quantity": 1 }]
+    },
+    {
+      "id": 7,
+      "customerId": 4,
+      "type": "SALE",
+      "totalAmount": 320.0,
+      "date": "2023-10-04T10:00:00Z",
+      "items": [{ "productId": 6, "quantity": 1 }]
+    },
+    {
+      "id": 8,
+      "customerId": 6,
+      "type": "PURCHASE",
+      "totalAmount": 1200.0,
+      "date": "2023-10-04T14:00:00Z",
+      "items": [{ "productId": 1, "quantity": 5 }]
+    },
+    {
+      "id": 9,
+      "customerId": 7,
+      "type": "SALE",
+      "totalAmount": 190.0,
+      "date": "2023-10-05T09:30:00Z",
+      "items": [{ "productId": 9, "quantity": 1 }]
+    },
+    {
+      "id": 10,
+      "customerId": 9,
+      "type": "SALE",
+      "totalAmount": 560.0,
+      "date": "2023-10-05T17:00:00Z",
+      "items": [{ "productId": 7, "quantity": 2 }]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Customer {
+  customer_id                     Int      @id @default(autoincrement()) @map("customer_id")
+  customer_name                   String   @map("customer_name")
+  customer_email                  String   @unique @map("customer_email")
+  customer_tax_id                 String   @unique @map("customer_tax_id")
+  customer_registration_date      DateTime @default(now()) @map("customer_registration_date")
+  customer_city                   String   @map("customer_city")
+  customer_state                  String   @map("customer_state")
+  customer_state_registration     String?  @map("customer_state_registration")
+  customer_municipal_registration String?  @map("customer_municipal_registration")
+
+  @@map("customers")
+}

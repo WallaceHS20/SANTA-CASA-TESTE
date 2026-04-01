@@ -38,13 +38,13 @@ export const SYSTEM_ROUTES: SystemRoutesMap = {
     DASHBOARD: {
       path: PageRoutesKeys.DASHBOARD,
       title: "Gestão de Produtos",
-      role: [UserRole.ADMIN],
+      role: [UserRole.ADMIN, UserRole.CUSTOMER],
       icon: "pi pi-home",
     },
     CUSTOMERS: {
       path: PageRoutesKeys.CUSTOMER_LIST,
       title: "Clientes Hospitalares",
-      role: [UserRole.ADMIN],
+      role: [UserRole.ADMIN,],
       icon: "pi pi-users",
     },
   },
@@ -55,12 +55,6 @@ export const SYSTEM_ROUTES: SystemRoutesMap = {
       title: "Histórico de Vendas",
       role: [UserRole.ADMIN, UserRole.CUSTOMER],
       icon: "pi pi-list",
-    },
-    DETAILS: {
-      path: PageRoutesKeys.TRANSACTION_DETAILS,
-      title: "Detalhes da Transação",
-      role: [UserRole.ADMIN, UserRole.CUSTOMER],
-      icon: "pi pi-search",
     },
   },
 };

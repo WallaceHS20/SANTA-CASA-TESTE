@@ -12,6 +12,7 @@ import {
 } from "@/components/Button";
 import { ProductFormModal } from "./ProductFormModal";
 import { PurchaseFormModal } from "./PurchaseFormModal";
+import { UserRole } from "@/Interfaces/Auth";
 
 export default function PainelShop() {
   const {
@@ -23,13 +24,7 @@ export default function PainelShop() {
     onPageChange,
     onSave,
     productModal,
-    isPurchaseOpen,
-    selectedProduct,
-    purchaseForm,
-    handleSetPurchaseField,
-    closePurchase,
-    onConfirmPurchase,
-    openPurchase
+    purchaseModal,
   } = useForm();
 
   const [viewMode, setViewMode] = useState<"table" | "cards">("table");
@@ -38,10 +33,11 @@ export default function PainelShop() {
     <div className="p-4">
       <div className="flex justify-content-end mb-3">
         <Button
+          permission={[UserRole.ADMIN]}
           label="Novo Produto"
           icon={ButtonIcon.ADD}
           severity={ButtonSeverity.SUCCESS}
-          onClick={productModal.openAdd} 
+          onClick={productModal.openAdd}
         />
       </div>
 
@@ -87,7 +83,10 @@ export default function PainelShop() {
         (viewMode === "table" ? (
           <DataTable
             value={data?.data || []}
-            columnsConfig={ColumnsConfig(productModal.openEdit, openPurchase)}
+            columnsConfig={ColumnsConfig(
+              productModal.openEdit,
+              purchaseModal.openModal,
+            )}
             loading={!data}
             lazy
             paginator
@@ -102,7 +101,7 @@ export default function PainelShop() {
           <ProductCardView
             products={data.data}
             onEdit={productModal.openEdit}
-            openPurchase={openPurchase}
+            openPurchase={purchaseModal.openModal}
           />
         ))}
 
@@ -117,12 +116,13 @@ export default function PainelShop() {
       />
 
       <PurchaseFormModal
-        visible={isPurchaseOpen}
-        product={selectedProduct}
-        form={purchaseForm}
-        onChange={handleSetPurchaseField}
-        onConfirm={onConfirmPurchase}
-        onHide={closePurchase}
+        visible={purchaseModal.isOpen}
+        onHide={purchaseModal.closeModal}
+        product={purchaseModal.selectedProduct}
+        form={purchaseModal.form}
+        formError={purchaseModal.formError}
+        onChange={purchaseModal.handleSetField}
+        onConfirm={purchaseModal.onConfirm}
       />
     </div>
   );

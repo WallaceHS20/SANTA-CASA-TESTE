@@ -1,146 +1,188 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
-//npx prisma db seed
 
 const adapter = new PrismaLibSql({
-  url: "file:./dev.db", 
+  url: "file:./dev.db",
 });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
   console.log("🛒 Iniciando o Seed do E-commerce Hospitalar...");
 
+  // Ordem correta para evitar erros de FK
   await prisma.transactionItem.deleteMany();
   await prisma.transaction.deleteMany();
   await prisma.product.deleteMany();
   await prisma.customer.deleteMany();
 
-  console.log("🧹 Banco limpo. Inserindo dados da loja...");
+  console.log("🧹 Banco limpo. Inserindo dados mestres...");
 
-  const customer1 = await prisma.customer.create({
+  // 🏥 1. CLIENTES COM IDS FIXOS
+  const hospitalCentral = await prisma.customer.create({
     data: {
-      customer_name: "Clínica Vida Bela (Cliente B2B)",
-      customer_email: "compras@vidabela.med.br",
-      customer_tax_id: "12.345.678/0001-99",
+      customer_id: 1, // ID FIXO
+      customer_name: "Hospital Central Santa Casa",
+      customer_email: "suprimentos@santacasa.org.br",
+      customer_tax_id: "60.444.333/0001-22",
       customer_city: "São Paulo",
       customer_state: "SP",
     },
   });
 
-  const customer2 = await prisma.customer.create({
+  const farmaciaPopular = await prisma.customer.create({
     data: {
-      customer_name: "Dr. Roberto Silva (Médico Parceiro)",
-      customer_email: "roberto.silva@medico.com",
-      customer_tax_id: "111.222.333-44", // CPF
+      customer_id: 2, // ID FIXO
+      customer_name: "Rede de Farmácias Popular",
+      customer_email: "estoque@farmapopular.com.br",
+      customer_tax_id: "15.999.888/0001-77",
       customer_city: "Rio de Janeiro",
       customer_state: "RJ",
     },
   });
 
-  const customer3 = await prisma.customer.create({
+  const fornecedorBio = await prisma.customer.create({
     data: {
-      customer_name: "Fornecedor Global Pharma",
-      customer_email: "vendas@globalpharma.com",
-      customer_tax_id: "99.888.777/0001-66", 
-      customer_city: "Campinas",
-      customer_state: "SP",
+      customer_name: "BioTech Suprimentos Hospitalares",
+      customer_email: "vendas@biotech.com.br",
+      customer_tax_id: "44.555.666/0001-88",
+      customer_city: "Belo Horizonte",
+      customer_state: "MG",
     },
   });
 
-  // 💊 3. CRIANDO PRODUTOS (Catálogo do E-commerce)
-  const product1 = await prisma.product.create({
-    data: {
-      product_sap_code: "SKU-AMOX-875",
-      product_name: "Amoxicilina 875mg c/ Clavulanato (Caixa)",
-      product_lot: "LOTE-PHARMA-001",
-      product_quantity: 500,
-      product_min_quantity: 50,
-      product_unit_val: 85.90,
-      product_total_val: 42950.00,
-      product_category: 1, // 1 = Medicamentos Restritos
-    },
-  });
+  // 💊 2. PRODUTOS (Catálogo Ampliado)
+  const products = await Promise.all([
+    prisma.product.create({
+      data: {
+        product_sap_code: "MED-AMX-01",
+        product_name: "Amoxicilina 875mg (Caixa 30cp)",
+        product_lot: "LT-2024-AX",
+        product_quantity: 450,
+        product_min_quantity: 100,
+        product_unit_val: 92.50,
+        product_total_val: 41625.00,
+        product_category: 1, // Medicamentos
+      }
+    }),
+    prisma.product.create({
+      data: {
+        product_sap_code: "EQU-OXI-05",
+        product_name: "Oxímetro de Pulso Digital Profissional",
+        product_lot: "LT-OXI-2024",
+        product_quantity: 85,
+        product_min_quantity: 10,
+        product_unit_val: 180.00,
+        product_total_val: 15300.00,
+        product_category: 3, // Equipamentos
+      }
+    }),
+    prisma.product.create({
+      data: {
+        product_sap_code: "DES-MSK-N95",
+        product_name: "Máscara Respiradora N95 (Pacote 50un)",
+        product_lot: "LT-MSK-99",
+        product_quantity: 1200,
+        product_min_quantity: 200,
+        product_unit_val: 145.00,
+        product_total_val: 174000.00,
+        product_category: 2, // Descartáveis
+      }
+    }),
+    prisma.product.create({
+      data: {
+        product_sap_code: "DES-GEL-70",
+        product_name: "Álcool em Gel 70% (Galão 5L)",
+        product_lot: "LT-GEL-01",
+        product_quantity: 300,
+        product_min_quantity: 50,
+        product_unit_val: 65.00,
+        product_total_val: 19500.00,
+        product_category: 2,
+      }
+    }),
+    prisma.product.create({
+      data: {
+        product_sap_code: "EQU-MON-02",
+        product_name: "Monitor Cardíaco Multiparamétrico",
+        product_lot: "LT-MON-V3",
+        product_quantity: 12,
+        product_min_quantity: 2,
+        product_unit_val: 4200.00,
+        product_total_val: 50400.00,
+        product_category: 3,
+      }
+    })
+  ]);
 
-  const product2 = await prisma.product.create({
-    data: {
-      product_sap_code: "SKU-MON-LCD",
-      product_name: "Monitor Multiparamétrico Portátil Tela LCD",
-      product_lot: "LOTE-EQUIP-22",
-      product_quantity: 30,
-      product_min_quantity: 5,
-      product_unit_val: 3500.00,
-      product_total_val: 105000.00,
-      product_category: 3, // 3 = Equipamentos Médicos
-    },
-  });
+  console.log("📦 Produtos inseridos. Gerando histórico de Compras e Remessas...");
 
-  const product3 = await prisma.product.create({
-    data: {
-      product_sap_code: "SKU-LUV-LATEX",
-      product_name: "Luva de Procedimento Látex (Caixa 100un)",
-      product_lot: "LOTE-DESC-99",
-      product_quantity: 2000,
-      product_min_quantity: 200,
-      product_unit_val: 29.90,
-      product_total_val: 59800.00,
-      product_category: 2, // 2 = Descartáveis
-    },
-  });
-  
-  // 📦 4. TRANSAÇÕES (Compras de Fornecedores e Vendas Online)
+  // 📝 3. TRANSAÇÕES (Terminologia: Compra = Tipo 1, Remessa = Tipo 2)
 
-  // Transação 1: Reposição de Estoque (ENTRADA - Type 1)
+  // A. Compra de Reposição (ENTRADA - Tipo 1)
   await prisma.transaction.create({
     data: {
       type: 1, 
-      description: "Reposição de Estoque - Pedido Fornecedor #1092",
-      total_amount: 59800.00,
-      customer_id: customer3.customer_id, // Global Pharma
+      description: "Compra de Suprimentos - Lote Trimestral BioTech",
+      total_amount: 15000.00,
+      customer_id: fornecedorBio.customer_id,
       items: {
         create: [
-          { product_id: product3.product_id, quantity: 2000, unit_price: 29.90, subtotal: 59800.00 }
+          { product_id: products[2].product_id, quantity: 100, unit_price: 150.00, subtotal: 15000.00 }
         ]
       }
     }
   });
 
-  // Transação 2: Venda Avulsa para Médico (SAÍDA - Type 2)
+  // B. Remessa ao Hospital (SAÍDA - Tipo 2)
   await prisma.transaction.create({
     data: {
       type: 2, 
-      description: "Venda E-commerce - Pedido #WEB-001 (Aprovado)",
-      total_amount: 3585.90, // 1 Monitor + 1 Amoxicilina
-      customer_id: customer2.customer_id, // Dr. Roberto
+      description: "Remessa para Hospital Central - Pedido Urgente #987",
+      total_amount: 12600.00,
+      customer_id: hospitalCentral.customer_id,
       items: {
         create: [
-          { product_id: product2.product_id, quantity: 1, unit_price: 3500.00, subtotal: 3500.00 },
-          { product_id: product1.product_id, quantity: 1, unit_price: 85.90, subtotal: 85.90 }
+          { product_id: products[4].product_id, quantity: 3, unit_price: 4200.00, subtotal: 12600.00 }
         ]
       }
     }
   });
 
-  console.log("Gerando histórico de vendas B2B recorrentes...");
-  
-  // Transações 3 a 10: Vendas Recorrentes da Clínica Vida Bela
-  for (let i = 1; i <= 8; i++) {
+  // C. Remessa para Farmácia (SAÍDA - Tipo 2)
+  await prisma.transaction.create({
+    data: {
+      type: 2,
+      description: "Remessa Comercial - Abastecimento Rede Popular",
+      total_amount: 4625.00,
+      customer_id: farmaciaPopular.customer_id,
+      items: {
+        create: [
+          { product_id: products[0].product_id, quantity: 50, unit_price: 92.50, subtotal: 4625.00 }
+        ]
+      }
+    }
+  });
+
+  // D. Gerando histórico aleatório de Remessas (Vendas)
+  console.log("⌛ Gerando fluxo de remessas recorrentes...");
+  for (let i = 1; i <= 10; i++) {
+    const isOdd = i % 2 === 0;
     await prisma.transaction.create({
       data: {
-        type: 2, // EXIT
-        description: `Venda E-commerce B2B - Pedido Assinatura Mensal #${i}`,
-        total_amount: (50 * 29.90) + (10 * 85.90), // 50 Caixas de Luva + 10 Amoxicilinas
-        customer_id: customer1.customer_id, // Clínica Vida Bela
+        type: 2,
+        description: `Remessa Programada #${2000 + i} - Cliente ${isOdd ? 'Hospital' : 'Farmácia'}`,
+        total_amount: 325.00,
+        customer_id: isOdd ? hospitalCentral.customer_id : farmaciaPopular.customer_id,
         items: {
           create: [
-            { product_id: product3.product_id, quantity: 50, unit_price: 29.90, subtotal: 1495.00 },
-            { product_id: product1.product_id, quantity: 10, unit_price: 85.90, subtotal: 859.00 }
+            { product_id: products[3].product_id, quantity: 5, unit_price: 65.00, subtotal: 325.00 }
           ]
         }
       }
     });
   }
 
-  console.log("✅ Seed finalizado com sucesso! Seu E-commerce está com as prateleiras cheias.");
+  console.log("✅ Seed finalizado! IDs 1 e 2 garantidos. Terminologia de Compras/Remessas aplicada.");
 }
 
 main()

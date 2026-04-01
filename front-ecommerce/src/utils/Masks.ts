@@ -9,6 +9,22 @@ export class Masks {
     return name.replace(/[^a-zA-ZÀ-ÿ ]/g, "").trim();
   }
 
+  static currency(value: string | number): string {
+    if (!value) return "R$ 0,00";
+
+    // Garante que o valor seja string e remove tudo que não for número
+    const cleanValue = String(value).replace(/\D/g, "");
+
+    // Converte para número e divide por 100 para criar as casas decimais
+    const numberValue = Number(cleanValue) / 100;
+
+    // Formata no padrão brasileiro
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(numberValue);
+  }
+
   static cpfCnpj(value: string): string {
     if (!value) return "";
     

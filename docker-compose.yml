@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # --- BACKEND ---
+  api:
+    build:
+      context: ./service-host
+      dockerfile: Dockerfile
+    container_name: epharma_api
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:./dev.db
+    # Volume para o banco de dados não sumir se o container parar
+    volumes:
+      - ./service-host/prisma:/app/prisma
+
+  # --- FRONTEND ---
+  web:
+    build:
+      context: ./front-ecommerce
+      dockerfile: Dockerfile
+    container_name: epharma_web
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api

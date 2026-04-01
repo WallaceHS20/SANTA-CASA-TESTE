@@ -115,8 +115,8 @@ export const useCustomerModal = () => {
       setEditingCustomer(customer);
       setForm({
         [PostCustomerKeys.NAME]: customer[CustomerResponseKeys.NAME] || "",
-        [PostCustomerKeys.EMAIL]: formattedTaxId,
-        [PostCustomerKeys.TAX_ID]: customer[CustomerResponseKeys.TAX_ID] || "",
+        [PostCustomerKeys.EMAIL]: customer[CustomerResponseKeys.EMAIL],
+        [PostCustomerKeys.TAX_ID]: formattedTaxId,
         [PostCustomerKeys.CITY]: customer[CustomerResponseKeys.CITY] || "",
         [PostCustomerKeys.STATE]: customer[CustomerResponseKeys.STATE] || "",
       });

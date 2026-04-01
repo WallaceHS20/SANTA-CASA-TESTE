@@ -348,3 +348,21 @@ C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\services\Transacti
 Foreign key constraint violated on the foreign key
 2026-04-01 15:34:23 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '12345678000199' inválido.
 2026-04-01 15:34:34 [error]: [CREATE] Falha ao criar cliente: O e-mail roberto.silva@medico.com já está em uso.
+2026-04-01 17:14:49 [error]: [CONTROLLER] Erro na transação: 
+Invalid `tx.transaction.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\services\TransactionService.ts:53:48
+
+  50   totalAmount += quantity * unitPrice;
+  51 }
+  52 
+→ 53 const transaction = await tx.transaction.create(
+Foreign key constraint violated on the foreign key
+2026-04-01 17:15:31 [error]: [CONTROLLER] Erro na transação: 
+Invalid `tx.transaction.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\services\TransactionService.ts:53:48
+
+  50   totalAmount += quantity * unitPrice;
+  51 }
+  52 
+→ 53 const transaction = await tx.transaction.create(
+Foreign key constraint violated on the foreign key

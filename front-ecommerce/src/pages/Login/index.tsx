@@ -23,9 +23,7 @@ export default function Login() {
         <div className="p-5 w-full login-form-wrapper">
           <div className="mb-6 text-center">
             <i className="pi pi-plus-circle text-primary mb-3 login-icon-main"></i>
-            <h2 className="font-bold text-900 text-3xl">
-              Acesso ao E-Pharma
-            </h2>
+            <h2 className="font-bold text-900 text-3xl">Acesso ao E-Pharma</h2>
           </div>
 
           <div className="flex flex-column gap-5">
@@ -51,9 +49,8 @@ export default function Login() {
             />
 
             <Button
-              label="Entrar no Sistema"
-              type="submit"
-              className="w-full p-2"
+              label="Entrar"
+              className="w-full p-3 flex justify-content-center"
               onClick={onSubmit}
             />
           </div>

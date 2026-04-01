@@ -9,7 +9,9 @@
     "dev:host": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run typecheck"
   },
   "dependencies": {
     "axios": "^1.14.0",

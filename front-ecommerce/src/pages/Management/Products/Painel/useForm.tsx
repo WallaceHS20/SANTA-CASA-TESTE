@@ -30,7 +30,7 @@ export const useForm = () => {
   const { handleError } = useError();
 
   const productModal = useProductModal();
-  const purchase = usePurchase(() => fetchProducts(form));
+  const purchaseModal = usePurchase(() => fetchProducts(form));
 
   const [form, setForm] = useState<IGetProductParams>(defaultForm);
   const [data, setData] = useState<IPaginatedResponse<IGetProductResponse>>();
@@ -72,7 +72,6 @@ export const useForm = () => {
     setData(undefined);
   }, []);
 
-  // 🎯 onSave refatorado: Usa a validação e lê os dados direto do productModal.form
   const onSave = async () => {
     if (!productModal.validateForm()) return;
 
@@ -124,10 +123,8 @@ export const useForm = () => {
     onClear,
     onSubmit,
     onPageChange,
-    
-    // 🎯 Retorna o modal inteiro como um objeto (igual fizemos no cliente)
-    productModal, 
-    ...purchase,
+    productModal,
+    purchaseModal,
     onSave,
   };
 };

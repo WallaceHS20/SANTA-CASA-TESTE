@@ -7,19 +7,19 @@ export enum UserRole {
 
 export const usersMock = [
   {
-    id: 6,
-    name: "Wallace Admin",
-    email: "admin@santacasa.com",
+    id: 1, 
+    name: "Admin Santa Casa",
+    email: "admin@santacasa.org.br",
     password: "admin123", 
-    avatar: "https://ui-avatars.com/api/?name=Wallace+Admin&background=0D8ABC&color=fff",
+    avatar: "https://ui-avatars.com/api/?name=Admin+Santa+Casa&background=005daa&color=fff",
     role: UserRole.ADMIN
   },
   {
-    id: 2,
-    name: "Joana Cliente",
-    email: "cliente@gmail.com",
+    id: 2, 
+    name: "Comprador Rede Popular",
+    email: "estoque@farmapopular.com.br",
     password: "user123",
-    avatar: "https://ui-avatars.com/api/?name=Joana+Cliente&background=F0E68C&color=000",
+    avatar: "https://ui-avatars.com/api/?name=Rede+Popular&background=ff0000&color=fff",
     role: UserRole.CUSTOMER
   }
 ];

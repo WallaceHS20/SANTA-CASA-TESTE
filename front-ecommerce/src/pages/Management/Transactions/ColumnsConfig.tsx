@@ -1,9 +1,23 @@
-import { TransactionResponseKeys, TransactionTypeId } from "@/Interfaces/Transactions";
+import { TransactionResponseKeys, TransactionTypeId, type IGetTransactionResponse } from "@/Interfaces/Transactions";
+import { Button, ButtonVariant } from "@/components/Button";
 import type { IColumnsConfig } from "@/components/DataTable";
 import { Tag } from "primereact/tag";
 
-export const ColumnsConfig = (): IColumnsConfig[] => {
+// 🎯 Agora a função recebe o 'openDetails' como parâmetro!
+export const ColumnsConfig = (openDetails: (data: IGetTransactionResponse) => void): IColumnsConfig[] => {
   return [
+    {
+      id: "actions",
+      header: "Ações", // Mudei para Ações para ficar padrão
+      body: (rowData: IGetTransactionResponse) => (
+        <Button 
+          icon="pi pi-eye" 
+          variant={ButtonVariant.GHOST} 
+          onClick={() => openDetails(rowData)} 
+          isIconButton
+        />
+      )
+    },
     {
       id: TransactionResponseKeys.ID,
       field: TransactionResponseKeys.ID,

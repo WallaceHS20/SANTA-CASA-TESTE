@@ -1,36 +1,61 @@
 import { useState, useEffect } from "react";
 import { TransactionService } from "@/services/Transactions";
 import { useError } from "@/utils/ErrorHandler";
-import type { IGetTransactionResponse } from "@/Interfaces/Transactions";
+import {
+  TransactionKeys,
+  type IGetTransactionResponse,
+} from "@/Interfaces/Transactions";
 import type { IPaginatedResponse } from "@/Interfaces/Common";
+import { useAuthContext } from "@/contexts/Auth";
+import { UserKeys, UserRole } from "@/Interfaces/Auth";
 
 export const useTransactions = () => {
   const { handleError } = useError();
-  
-  const [data, setData] = useState<IPaginatedResponse<IGetTransactionResponse>>();
+  const { user } = useAuthContext();
+
+  const [data, setData] =
+    useState<IPaginatedResponse<IGetTransactionResponse>>();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  
-  // 🎯 Estado local para gerenciar APENAS a tabela, sem travar a tela
+
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<IGetTransactionResponse | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchTransactions = async () => {
+    let isMounted = true;
+    const userId =
+      user?.[UserKeys.ROLE] === UserRole.CUSTOMER
+        ? user[UserKeys.ID]
+        : undefined;
+    const loadTransactions = async () => {
       setIsLoading(true);
       try {
-        const response = await TransactionService.getTransactions({ 
-          page, 
-          limit 
+        const response = await TransactionService.getTransactions({
+          page,
+          limit,
+          [TransactionKeys.CUSTOMER_ID]: userId,
         });
-        setData(response);
+        if (isMounted) {
+          setData(response);
+        }
       } catch (error) {
-        handleError("Erro ao buscar transações", error);
+        if (isMounted) {
+          handleError("Erro ao buscar transações", error);
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
-    fetchTransactions();
+    loadTransactions();
+
+    return () => {
+      isMounted = false;
+    };
   }, [page, limit]);
 
   const onPageChange = (newPage: number, newLimit: number) => {
@@ -38,5 +63,24 @@ export const useTransactions = () => {
     setLimit(newLimit);
   };
 
-  return { data, page, limit, onPageChange, isLoading }; 
+  const openDetails = (transaction: IGetTransactionResponse) => {
+    setSelectedTransaction(transaction);
+    setIsDetailOpen(true);
+  };
+
+  const closeDetails = () => {
+    setIsDetailOpen(false);
+    setSelectedTransaction(null);
+  };
+
+  return {
+    data,
+    form: { page, limit },
+    onPageChange,
+    isLoading,
+    openDetails,
+    closeDetails,
+    selectedTransaction,
+    isDetailOpen,
+  };
 };

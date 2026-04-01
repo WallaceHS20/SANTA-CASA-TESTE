@@ -12,46 +12,57 @@ import {
   type UserRole,
 } from "../../Interfaces/Auth";
 import { AuthService } from "../../services/Auth";
-import { PageRoutesKeys } from "@/Interfaces/Routes";
 
 interface Props {
   user: IUser | null;
   signed: boolean;
-  role: UserRole | null; // Facilitador para o Front
+  role: UserRole | null;
   login: (data: IAuthParams) => Promise<void>;
   logout: () => void;
 }
 
 const AuthContext = createContext<Props>({} as Props);
 
-interface AutProviderhContextProps {
+interface AuthProviderProps {
   children: ReactNode;
 }
 
-export function AuthProvider({ children }: AutProviderhContextProps) {
-  const [user, setUser] = useState<IUser | null>(null);
+export function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<IUser | null>(() => {
+    const storagedUser = localStorage.getItem("@SantaCasa:user");
+    const storagedToken = localStorage.getItem("@SantaCasa:token");
+
+    if (storagedUser && storagedToken) {
+      try {
+        return JSON.parse(storagedUser);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
 
   const login = async (data: IAuthParams) => {
     try {
       const response = await AuthService.authLogin(data);
       const { user: userData, token } = response;
-      setUser(userData);
+      
       localStorage.setItem("@SantaCasa:token", token);
+      localStorage.setItem("@SantaCasa:user", JSON.stringify(userData));
+      
+      setUser(userData);
     } catch (error) {
       throw error;
     }
   };
 
   function logout() {
-    localStorage.clear();
+    localStorage.removeItem("@SantaCasa:token");
+    localStorage.removeItem("@SantaCasa:user");
     setUser(null);
   }
 
   useEffect(() => {
-    const storagedUser = localStorage.getItem("@SantaCasa:user");
-    if (storagedUser) {
-      setUser(JSON.parse(storagedUser));
-    }
   }, []);
 
   return (
@@ -71,9 +82,9 @@ export function AuthProvider({ children }: AutProviderhContextProps) {
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
-  if (!context) {
+  if (!context || Object.keys(context).length === 0) {
     throw new Error(
-      "useAuthContext deve ser usado dentro de um NotificationProvider",
+      "useAuthContext deve ser usado dentro de um AuthProvider",
     );
   }
   return context;

@@ -83,7 +83,7 @@ export const ProductFormModal = ({
             options={categoryOptions}
             value={form[PostProductKeys.CATEGORY] || ""}
             handleSetField={onChange}
-            // Supondo que o BasicSelectField aceite error, senão adicione um span embaixo
+           error={formError[PostProductKeys.CATEGORY]}
           />
         </div>
 

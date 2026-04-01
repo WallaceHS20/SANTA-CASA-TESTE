@@ -55,7 +55,15 @@ export class TransactionRepository {
         take: limit,
         orderBy: { [TransactionKeys.CREATED_AT]: "desc" }, // Mais recentes primeiro
         include: {
-          items: true,
+          items: {
+          include: {
+            product: {
+              select: {
+                product_name: true, 
+              }
+            }
+          }
+        },
           customer: {
             select: { customer_name: true },
           },

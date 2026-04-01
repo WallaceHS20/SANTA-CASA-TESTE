@@ -78,8 +78,3 @@ Graças à containerização com Docker, você não precisa configurar nada loca
 > **Nota:** Durante a inicialização, o Docker executará automaticamente o script `entrypoint.sh`, que realiza as migrações do banco e o **Seed** dos dados (Clientes, Produtos e Histórico de Transações).
 
 ---
-
-## 📦 Funcionalidades em Destaque
-* **Freight Tracker:** Visualização em tempo real do status de entrega (Pedido, Processando, Em Trânsito, Entregue).
-* **Persistência de Sessão:** Sistema de autenticação que resiste ao recarregamento de página (F5).
-* **Estoque Automatizado:** Atualização de saldo e valor total de inventário disparada por transações.

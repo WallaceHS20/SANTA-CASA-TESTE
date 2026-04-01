@@ -6,7 +6,7 @@ import {
   type IGetProductParams,
 } from "@/Interfaces/Products";
 import { BasicSelectField } from "@/components/FormFields/BasicSelectField";
-import { categoryOptions, locationOptions } from "@/constants/Routes/products";
+import { categoryOptions } from "@/constants/Routes/products";
 
 interface Props {
   form: IGetProductParams;
@@ -56,16 +56,6 @@ export const SearchFilters = ({
         />
       </div>
 
-      <div className="col-12 md:col-3">
-        <BasicSelectField
-          id={GetProductParamsKeys.LOCATION}
-          name={GetProductParamsKeys.LOCATION}
-          label="Localização"
-          options={locationOptions}
-          value={form[GetProductParamsKeys.LOCATION]}
-          handleSetField={handleSetField}
-        />
-      </div>
     </SearchFilterHeader>
   );
 };

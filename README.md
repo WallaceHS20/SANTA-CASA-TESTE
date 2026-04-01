@@ -16,6 +16,7 @@ O **E-Pharma** é uma plataforma integrada de e-commerce e gestão de suprimento
 - **SQLite (LibSQL)** (Banco de dados ágil e local)
 - **TSX** (Execução direta de TypeScript em ambiente de desenvolvimento)
 - **Docker** (Containerização completa do ecossistema)
+- **Swagger (OpenAPI)** (Documentação interativa da API)
 
 ---
 
@@ -82,6 +83,27 @@ npm run dev
 
 - **Frontend:** http://localhost:5173  
 - **Backend:** http://localhost:3000  
+
+---
+
+## 📄 Documentação da API (Swagger)
+
+A API possui documentação interativa via Swagger.
+
+- Acesse: **http://localhost:3000/api-docs**
+
+### 🔐 Autorização no Swagger
+
+Para testar os endpoints protegidos:
+
+1. Clique no botão **"Authorize"** no topo da página.
+2. No campo de autenticação, insira:
+   ```
+   1
+   ```
+3. Clique em **"Authorize"** e depois em **"Close"**.
+
+> Isso utilizará o usuário **Admin (ID = 1)** já previamente cadastrado no seed para autenticar as requisições.
 
 ---
 

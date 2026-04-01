@@ -2680,3 +2680,110 @@ Foreign key constraint violated on the foreign key
 2026-04-01 15:29:52 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
 2026-04-01 15:29:52 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
 2026-04-01 15:29:52 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:32:31 [info]: Chamada recebida: GET /products/?product_name=&product_sap_code=&product_lot=&page=1&limit=10 [object Object]
+2026-04-01 15:32:37 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:32:37 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:32:56 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:32:56 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:32:59 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:32:59 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:33:00 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]
+2026-04-01 15:33:04 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:33:04 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:33:21 [info]: Chamada recebida: PATCH /customers/4 [object Object]
+2026-04-01 15:33:21 [info]: [UPDATE] Tentativa de atualização para o ID: 4
+2026-04-01 15:33:21 [info]: [UPDATE] Cliente ID: 4 atualizado com sucesso.
+2026-04-01 15:33:21 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:33:21 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:33:41 [info]: Chamada recebida: PATCH /customers/5 [object Object]
+2026-04-01 15:33:41 [info]: [UPDATE] Tentativa de atualização para o ID: 5
+2026-04-01 15:33:41 [info]: [UPDATE] Cliente ID: 5 atualizado com sucesso.
+2026-04-01 15:33:41 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:33:41 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:34:04 [info]: Chamada recebida: DELETE /customers/6 [object Object]
+2026-04-01 15:34:04 [info]: [REMOVE] Solicitando exclusão do ID: 6
+2026-04-01 15:34:04 [info]: [REMOVE] Cliente ID: 6 removido do sistema.
+2026-04-01 15:34:04 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:34:04 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:34:23 [info]: Chamada recebida: POST /customers/ [object Object]
+2026-04-01 15:34:23 [info]: [CREATE] Iniciando criação para o cliente: Clínica Vida Bela (Cliente B2C)
+2026-04-01 15:34:23 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '12345678000199' inválido.
+2026-04-01 15:34:34 [info]: Chamada recebida: POST /customers/ [object Object]
+2026-04-01 15:34:34 [info]: [CREATE] Iniciando criação para o cliente: Clínica Vida Bela (Cliente B2C)
+2026-04-01 15:34:34 [error]: [CREATE] Falha ao criar cliente: O e-mail roberto.silva@medico.com já está em uso.
+2026-04-01 15:34:39 [info]: Chamada recebida: POST /customers/ [object Object]
+2026-04-01 15:34:39 [info]: [CREATE] Iniciando criação para o cliente: Clínica Vida Bela (Cliente B2C)
+2026-04-01 15:34:39 [info]: [CREATE] Cliente criado com sucesso! ID: 7
+2026-04-01 15:34:39 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:34:39 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:47:57 [info]: Chamada recebida: POST /auth/login [object Object]
+2026-04-01 15:51:09 [info]: Chamada recebida: POST /auth/login [object Object]
+2026-04-01 15:51:56 [info]: Chamada recebida: POST /auth/login [object Object]
+2026-04-01 15:53:19 [info]: Chamada recebida: POST /auth/login [object Object]
+2026-04-01 15:53:23 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:53:23 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:53:38 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:53:38 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 15:54:21 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 15:54:21 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:01:19 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:01:19 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:01:28 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:01:28 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:01:30 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:01:30 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:05:39 [info]: Chamada recebida: POST /auth/login [object Object]
+2026-04-01 16:05:42 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:05:42 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:06:28 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:06:28 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:06:30 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:06:30 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:06:35 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:06:35 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:06:38 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:06:38 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:06:59 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:06:59 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:07:03 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:07:03 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:07:06 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:07:06 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:17:03 [info]: Chamada recebida: POST /auth/login [object Object]
+2026-04-01 16:17:21 [info]: Chamada recebida: GET /products/?product_name=&product_sap_code=&product_lot=&page=1&limit=10 [object Object]
+2026-04-01 16:17:38 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]
+2026-04-01 16:17:40 [info]: Chamada recebida: GET /products/?product_name=&product_sap_code=&product_lot=&page=1&limit=10 [object Object]
+2026-04-01 16:18:21 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:18:21 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:00 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:00 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:09 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:09 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:11 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:11 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:15 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:15 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:19 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:19 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:34 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:34 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:41 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:41 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:45 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:45 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:50 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:50 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:23:54 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:23:54 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:24:32 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:24:32 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:24:37 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:24:37 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:34:45 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]
+2026-04-01 16:35:45 [info]: Chamada recebida: GET /customers/?page=1&limit=10 [object Object]
+2026-04-01 16:35:45 [info]: [LIST] Listagem solicitada. Filtros: {"page":"1","limit":"10"}
+2026-04-01 16:36:01 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]
+2026-04-01 16:36:03 [info]: Chamada recebida: GET /transactions/?page=2&limit=10 [object Object]
+2026-04-01 16:36:05 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]
+2026-04-01 16:36:12 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]
+2026-04-01 16:36:14 [info]: Chamada recebida: GET /transactions/?page=1&limit=10 [object Object]

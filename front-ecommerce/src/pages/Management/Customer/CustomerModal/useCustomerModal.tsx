@@ -8,6 +8,7 @@ import {
   type IPostCustomerBase,
 } from "@/Interfaces/Customer";
 import { Validations } from "@/utils/Validate";
+import { Masks } from "@/utils/Masks";
 
 const defaultForm: IPostCustomerBase = {
   [PostCustomerKeys.NAME]: "",
@@ -60,7 +61,8 @@ export const useCustomerModal = () => {
       return "";
     },
     [PostCustomerKeys.TAX_ID]: (value: string) => {
-      if (!value || !Validations.isValidTaxId(value)) return "Insira um CPF/CNPJ válido.";
+      if (!value || !Validations.isValidTaxId(value))
+        return "Insira um CPF/CNPJ válido.";
       return "";
     },
     [PostCustomerKeys.EMAIL]: (value: string) => {
@@ -98,18 +100,22 @@ export const useCustomerModal = () => {
         "Formulário inválido",
         "Verifique os campos preenchidos e tente novamente.",
       );
-      return false; 
+      return false;
     }
 
-    return true; 
+    return true;
   };
 
   const openModal = useCallback((customer?: IGetCustomerResponse) => {
+    const rawTaxId = customer
+      ? Masks.removeSpecialChars(customer[CustomerResponseKeys.TAX_ID])
+      : "";
+    const formattedTaxId = Masks.cpfCnpj(rawTaxId);
     if (customer) {
       setEditingCustomer(customer);
       setForm({
         [PostCustomerKeys.NAME]: customer[CustomerResponseKeys.NAME] || "",
-        [PostCustomerKeys.EMAIL]: customer[CustomerResponseKeys.EMAIL] || "",
+        [PostCustomerKeys.EMAIL]: formattedTaxId,
         [PostCustomerKeys.TAX_ID]: customer[CustomerResponseKeys.TAX_ID] || "",
         [PostCustomerKeys.CITY]: customer[CustomerResponseKeys.CITY] || "",
         [PostCustomerKeys.STATE]: customer[CustomerResponseKeys.STATE] || "",

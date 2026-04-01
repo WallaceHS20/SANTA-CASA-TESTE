@@ -9,6 +9,8 @@ import {
   CustomerResponseKeys,
   type IGetCustomerResponse,
 } from "@/Interfaces/Customer";
+import { CopyContent } from "@/components/CopyContent";
+import { Masks } from "@/utils/Masks";
 
 export const ColumnsConfig = (
   onEdit: (customer: IGetCustomerResponse) => void,
@@ -30,6 +32,21 @@ export const ColumnsConfig = (
       id: CustomerResponseKeys.TAX_ID,
       field: CustomerResponseKeys.TAX_ID,
       header: "CPF/CNPJ",
+      body: (rowData: IGetCustomerResponse) => {
+        const rawTaxId = Masks.removeSpecialChars(
+          rowData[CustomerResponseKeys.TAX_ID],
+        );
+        const formattedTaxId = Masks.cpfCnpj(
+          rowData[CustomerResponseKeys.TAX_ID],
+        );
+
+        return (
+          <CopyContent
+            content={rawTaxId} 
+            label={formattedTaxId} 
+          />
+        );
+      },
     },
     {
       id: CustomerResponseKeys.CITY,

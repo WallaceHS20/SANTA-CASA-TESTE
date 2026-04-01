@@ -346,3 +346,5 @@ C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\services\Transacti
   52 
 → 53 const transaction = await tx.transaction.create(
 Foreign key constraint violated on the foreign key
+2026-04-01 15:34:23 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '12345678000199' inválido.
+2026-04-01 15:34:34 [error]: [CREATE] Falha ao criar cliente: O e-mail roberto.silva@medico.com já está em uso.

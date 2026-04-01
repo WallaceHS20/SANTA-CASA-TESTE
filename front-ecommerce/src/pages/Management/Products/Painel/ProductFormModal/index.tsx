@@ -1,44 +1,31 @@
 import { Dialog } from "primereact/dialog";
 import { BasicInputField } from "@/components/FormFields/BasicInputField";
 import { BasicSelectField } from "@/components/FormFields/BasicSelectField";
-import {
-  Button,
-  ButtonSeverity,
-  ButtonIcon,
-  ButtonVariant,
-} from "@/components/Button";
-import {
-  PostProductKeys,
-  type IGetProductResponse,
-} from "@/Interfaces/Products";
-import { useEffect, useState } from "react";
+import { Button, ButtonSeverity, ButtonIcon, ButtonVariant } from "@/components/Button";
+import { PostProductKeys } from "@/Interfaces/Products";
 import { categoryOptions } from "@/constants/Routes/products";
+import type { THandleSetFieldProps } from "@/Interfaces/Common";
 
 interface Props {
   visible: boolean;
   onHide: () => void;
-  product?: IGetProductResponse | null;
-  onSave: (data: any) => void;
+  isEditing: boolean;
+  form: any;
+  formError: any;
+  onChange: (event: THandleSetFieldProps) => void;
+  onSave: () => void;
 }
 
 export const ProductFormModal = ({
   visible,
   onHide,
-  product,
+  isEditing,
+  form,
+  formError,
+  onChange,
   onSave,
 }: Props) => {
-  const [form, setForm] = useState<any>({});
-
-  useEffect(() => {
-    if (product) setForm(product);
-    else setForm({});
-  }, [product, visible]);
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setForm((prev: any) => ({ ...prev, [name]: value }));
-  };
-
+  
   const footer = (
     <div className="flex justify-content-end gap-2">
       <Button
@@ -50,14 +37,14 @@ export const ProductFormModal = ({
       <Button
         label="Salvar Produto"
         icon={ButtonIcon.SAVE}
-        onClick={() => onSave(form)}
+        onClick={onSave}
       />
     </div>
   );
 
   return (
     <Dialog
-      header={product ? "Editar Produto" : "Novo Cadastro"}
+      header={isEditing ? "Editar Produto" : "Novo Cadastro"}
       visible={visible}
       style={{ width: "50vw" }}
       breakpoints={{ "960px": "75vw", "641px": "100vw" }}
@@ -72,7 +59,8 @@ export const ProductFormModal = ({
             name={PostProductKeys.NAME}
             label="Nome Completo do Produto"
             value={form[PostProductKeys.NAME] || ""}
-            onChange={handleChange}
+            onChange={onChange}
+            error={formError[PostProductKeys.NAME]}
           />
         </div>
 
@@ -82,7 +70,8 @@ export const ProductFormModal = ({
             name={PostProductKeys.SAP_CODE}
             label="Código SAP"
             value={form[PostProductKeys.SAP_CODE] || ""}
-            onChange={handleChange}
+            onChange={onChange}
+            error={formError[PostProductKeys.SAP_CODE]}
           />
         </div>
 
@@ -93,7 +82,8 @@ export const ProductFormModal = ({
             label="Categoria"
             options={categoryOptions}
             value={form[PostProductKeys.CATEGORY] || ""}
-            handleSetField={handleChange}
+            handleSetField={onChange}
+            // Supondo que o BasicSelectField aceite error, senão adicione um span embaixo
           />
         </div>
 
@@ -104,7 +94,8 @@ export const ProductFormModal = ({
             label="Estoque Atual"
             type="number"
             value={form[PostProductKeys.QUANTITY] || 0}
-            onChange={handleChange}
+            onChange={onChange}
+            error={formError[PostProductKeys.QUANTITY]}
           />
         </div>
 
@@ -115,7 +106,8 @@ export const ProductFormModal = ({
             label="Estoque Mínimo"
             type="number"
             value={form[PostProductKeys.MIN_QUANTITY] || 0}
-            onChange={handleChange}
+            onChange={onChange}
+            error={formError[PostProductKeys.MIN_QUANTITY]}
           />
         </div>
 
@@ -125,7 +117,8 @@ export const ProductFormModal = ({
             name={PostProductKeys.UNIT_VAL}
             label="Valor Unitário (R$)"
             value={form[PostProductKeys.UNIT_VAL] || ""}
-            onChange={handleChange}
+            onChange={onChange}
+            error={formError[PostProductKeys.UNIT_VAL]}
           />
         </div>
       </div>

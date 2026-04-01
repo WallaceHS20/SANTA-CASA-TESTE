@@ -12,8 +12,8 @@ import {
 import { ProductService } from "@/services/Products";
 import { useError } from "@/utils/ErrorHandler";
 import { useState, useCallback } from "react";
-import { useProductModal } from "./ProductModal/useProductModal";
 import { usePurchase } from "./PurchaseFormModal/usePurchase";
+import { useProductModal } from "./ProductFormModal/useProductModal";
 
 const defaultForm: IGetProductParams = {
   [GetProductParamsKeys.NAME]: "",
@@ -72,7 +72,10 @@ export const useForm = () => {
     setData(undefined);
   }, []);
 
-  const onSave = async (formData: any) => {
+  // 🎯 onSave refatorado: Usa a validação e lê os dados direto do productModal.form
+  const onSave = async () => {
+    if (!productModal.validateForm()) return;
+
     Loading.show(
       productModal.editingProduct
         ? "Atualizando produto..."
@@ -80,24 +83,15 @@ export const useForm = () => {
     );
 
     try {
+      const formData = productModal.form;
+
       const dataToSend = {
         ...formData,
         [PostProductKeys.LOT]: String(formData[PostProductKeys.LOT] || ""),
-
-        [PostProductKeys.QUANTITY]: Number(
-          formData[PostProductKeys.QUANTITY] || 0,
-        ),
-
-        [PostProductKeys.MIN_QUANTITY]: Number(
-          formData[PostProductKeys.MIN_QUANTITY] || 0,
-        ),
-
-        [PostProductKeys.UNIT_VAL]: Number(
-          formData[PostProductKeys.UNIT_VAL] || 0,
-        ),
-
+        [PostProductKeys.QUANTITY]: Number(formData[PostProductKeys.QUANTITY] || 0),
+        [PostProductKeys.MIN_QUANTITY]: Number(formData[PostProductKeys.MIN_QUANTITY] || 0),
+        [PostProductKeys.UNIT_VAL]: Number(formData[PostProductKeys.UNIT_VAL] || 0),
         [PostProductKeys.CATEGORY]: Number(formData[PostProductKeys.CATEGORY]),
-
         [PostProductKeys.LOCATION]: formData[PostProductKeys.LOCATION]
           ? Number(formData[PostProductKeys.LOCATION])
           : null,
@@ -130,7 +124,9 @@ export const useForm = () => {
     onClear,
     onSubmit,
     onPageChange,
-    ...productModal,
+    
+    // 🎯 Retorna o modal inteiro como um objeto (igual fizemos no cliente)
+    productModal, 
     ...purchase,
     onSave,
   };

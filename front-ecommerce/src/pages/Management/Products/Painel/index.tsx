@@ -10,7 +10,7 @@ import {
   ButtonVariant,
   ButtonIcon,
 } from "@/components/Button";
-import { ProductFormModal } from "./ProductModal";
+import { ProductFormModal } from "./ProductFormModal";
 import { PurchaseFormModal } from "./PurchaseFormModal";
 
 export default function PainelShop() {
@@ -21,12 +21,8 @@ export default function PainelShop() {
     onSubmit,
     data,
     onPageChange,
-    isOpen,
-    editingProduct,
-    openAdd,
-    openEdit,
-    close,
     onSave,
+    productModal,
     isPurchaseOpen,
     selectedProduct,
     purchaseForm,
@@ -45,7 +41,7 @@ export default function PainelShop() {
           label="Novo Produto"
           icon={ButtonIcon.ADD}
           severity={ButtonSeverity.SUCCESS}
-          onClick={openAdd}
+          onClick={productModal.openAdd} 
         />
       </div>
 
@@ -56,12 +52,12 @@ export default function PainelShop() {
         onSubmit={onSubmit}
       />
 
-      <div className="d-flex justify-content-between align-items-center mb-4 bg-white p-3 border-round-xl shadow-1">
+      <div className="flex justify-content-between align-items-center mb-4 bg-white p-3 border-round-xl shadow-1">
         <h5 className="m-0 text-secondary">
           Resultados ({data?.meta?.total || 0})
         </h5>
 
-        <div className="d-flex gap-2">
+        <div className="flex gap-2">
           <Button
             icon="pi pi-table"
             variant={
@@ -91,7 +87,7 @@ export default function PainelShop() {
         (viewMode === "table" ? (
           <DataTable
             value={data?.data || []}
-            columnsConfig={ColumnsConfig(openEdit, openPurchase)}
+            columnsConfig={ColumnsConfig(productModal.openEdit, openPurchase)}
             loading={!data}
             lazy
             paginator
@@ -105,15 +101,18 @@ export default function PainelShop() {
         ) : (
           <ProductCardView
             products={data.data}
-            onEdit={openEdit}
+            onEdit={productModal.openEdit}
             openPurchase={openPurchase}
           />
         ))}
 
       <ProductFormModal
-        visible={isOpen}
-        product={editingProduct}
-        onHide={close}
+        visible={productModal.isOpen}
+        onHide={productModal.close}
+        isEditing={!!productModal.editingProduct}
+        form={productModal.form}
+        formError={productModal.formError}
+        onChange={productModal.handleSetField}
         onSave={onSave}
       />
 

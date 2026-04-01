@@ -41,6 +41,15 @@ export const router = createBrowserRouter([
             path: PageRoutesKeys.DASHBOARD, 
             element: <ProductsPainel /> 
           },
+        ],
+      },
+      {
+        element: (
+          <ProtectedRoute
+            allowedRoles={SYSTEM_ROUTES[SectionKeys.MANAGEMENT].CUSTOMERS[BaseRouteKey.ROLE]}
+          />
+        ),
+        children: [
           {
             path: PageRoutesKeys.CUSTOMER_LIST,
             element: <CustomerList/>,

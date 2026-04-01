@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug Santa Casa Front",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/front-ecommerce", 
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "vite:///src/*": "${webRoot}/src/*"
+      },
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+    }
+  ]
+}

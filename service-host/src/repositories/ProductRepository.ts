@@ -35,12 +35,10 @@ export class ProductRepository {
   ): Promise<IPaginatedResponse<Product>> {
     const where: any = {};
 
-    // 1. Configurando a Paginação (Padrão: Página 1, 10 itens por página)
     const page = Number(params.page) || 1;
     const limit = Number(params.limit) || 10;
-    const skip = (page - 1) * limit; // Fórmula clássica de paginação
+    const skip = (page - 1) * limit; 
 
-    // 2. Montando os Filtros (ignorando page e limit do loop)
     Object.entries(params).forEach(([key, value]) => {
       if (
         value !== undefined &&
@@ -62,7 +60,6 @@ export class ProductRepository {
       }
     });
 
-    // 3. 🚀 ALTA PERFORMANCE: Buscando dados e contando o total em paralelo!
     const [data, total] = await prisma.$transaction([
       prisma.product.findMany({
         where,
@@ -70,10 +67,9 @@ export class ProductRepository {
         take: limit, // Pega apenas a quantidade limite
         orderBy: { [ProductKeys.NAME]: "asc" },
       }),
-      prisma.product.count({ where }), // Conta quantos itens no total atendem a esse filtro
+      prisma.product.count({ where }), 
     ]);
 
-    // 4. Retornando o formato blindado
     return {
       data: data as unknown as Product[],
       meta: {

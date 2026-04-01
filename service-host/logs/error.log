@@ -131,3 +131,218 @@ Unknown argument `page`. Available options are marked with ?.
 2026-03-31 19:56:10 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '11122233344' inválido.
 2026-03-31 19:57:10 [error]: [CONTROLLER] Erro ao criar produto: O Código SAP SAP-DIP-500 já está cadastrado.
 2026-03-31 19:58:02 [error]: [CONTROLLER] Erro na transação: Produto ID 1 não encontrado.
+2026-04-01 12:24:25 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.findUnique()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:95:34
+
+  92 }
+  93 
+  94 async findBySapCode(sapCode: string): Promise<Product | null> {
+→ 95   return (await prisma.product.findUnique({
+         where: {
+           product_sap_code: undefined,
+       ?   product_id?: Int,
+       ?   product_sap_code_product_lot?: ProductProduct_sap_codeProduct_lotCompoundUniqueInput,
+       ?   AND?: ProductWhereInput | ProductWhereInput[],
+       ?   OR?: ProductWhereInput[],
+       ?   NOT?: ProductWhereInput | ProductWhereInput[],
+       ?   product_name?: StringFilter | String,
+       ?   product_lot?: StringFilter | String,
+       ?   product_quantity?: IntFilter | Int,
+       ?   product_min_quantity?: IntFilter | Int,
+       ?   product_unit_val?: DecimalFilter | Decimal,
+       ?   product_total_val?: DecimalFilter | Decimal,
+       ?   product_unit_weight?: FloatNullableFilter | Float | Null,
+       ?   product_category?: IntFilter | Int,
+       ?   product_location?: IntNullableFilter | Int | Null,
+       ?   product_entry_date?: DateTimeFilter | DateTime,
+       ?   product_expiry_date?: DateTimeNullableFilter | DateTime | Null,
+       ?   product_active?: BoolFilter | Boolean,
+       ?   transaction_items?: TransactionItemListRelationFilter
+         }
+       })
+
+Argument `where` of type ProductWhereUniqueInput needs at least one of `product_id`, `product_sap_code` or `product_sap_code_product_lot` arguments. Available options are marked with ?.
+2026-04-01 12:25:34 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:28:34
+
+  25   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  26 };
+  27 
+→ 28 return (await prisma.product.create({
+       data: {
+         product_sap_code: "SKU-AMOX-87655",
+         product_name: "Teste",
+         product_quantity: "222",
+         product_min_quantity: "22230",
+         product_unit_val: "12.550",
+         product_total_val: 2786.1000000000004,
+         product_expiry_date: null,
+     +   product_lot: String
+       }
+     })
+
+Argument `product_lot` is missing.
+2026-04-01 12:25:39 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:28:34
+
+  25   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  26 };
+  27 
+→ 28 return (await prisma.product.create({
+       data: {
+         product_sap_code: "SKU-AMOX-87655",
+         product_name: "Teste",
+         product_quantity: "222",
+         product_min_quantity: "22230",
+         product_unit_val: "12.550",
+         product_total_val: 2786.1000000000004,
+         product_expiry_date: null,
+     +   product_lot: String
+       }
+     })
+
+Argument `product_lot` is missing.
+2026-04-01 12:26:05 [error]: [CONTROLLER] Erro ao criar produto: O Código SAP SKU-AMOX-875 já está cadastrado.
+2026-04-01 12:34:37 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:28:34
+
+  25   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  26 };
+  27 
+→ 28 return (await prisma.product.create({
+       data: {
+         product_category: 1,
+         product_name: "Teste",
+         product_sap_code: "SKU-AMOX-8766",
+         product_quantity: "1110",
+         product_min_quantity: "20",
+         product_unit_val: "550",
+         product_location: 4,
+         product_total_val: 610500,
+         product_expiry_date: null,
+     +   product_lot: String
+       }
+     })
+
+Argument `product_lot` is missing.
+2026-04-01 12:42:30 [error]: [CONTROLLER] Erro ao criar produto: O Código SAP SKU-AMOX-875 já está cadastrado.
+2026-04-01 12:54:06 [error]: [CONTROLLER] Erro ao criar produto: A quantidade inicial não pode ser negativa.
+2026-04-01 12:54:29 [error]: [CONTROLLER] Erro ao atualizar produto ID 11: 
+Invalid `prisma.product.update()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:150:34
+
+  147   updateData[ProductKeys.TOTAL_VAL] = totalValue;
+  148 }
+  149 
+→ 150 return (await prisma.product.update({
+        where: {
+          product_id: 11
+        },
+        data: {
+          product_id: 11,
+          product_name: "teste 2",
+          product_quantity: 550,
+          product_min_quantity: "220",
+                                ~~~~~
+          product_unit_val: "12.5",
+          product_total_val: 6875,
+          product_unit_weight: null,
+          product_category: 1,
+          product_location: 4,
+          product_entry_date: "2026-04-01T15:54:14.203Z",
+          product_expiry_date: null,
+          product_active: true
+        }
+      })
+
+Argument `product_min_quantity`: Invalid value provided. Expected Int or IntFieldUpdateOperationsInput, provided String.
+2026-04-01 12:54:33 [error]: [CONTROLLER] Erro ao atualizar produto ID 11: 
+Invalid `prisma.product.update()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:150:34
+
+  147   updateData[ProductKeys.TOTAL_VAL] = totalValue;
+  148 }
+  149 
+→ 150 return (await prisma.product.update({
+        where: {
+          product_id: 11
+        },
+        data: {
+          product_id: 11,
+          product_name: "teste 2",
+          product_quantity: 550,
+          product_min_quantity: "220",
+                                ~~~~~
+          product_unit_val: "12.5",
+          product_total_val: 6875,
+          product_unit_weight: null,
+          product_category: 1,
+          product_location: 4,
+          product_entry_date: "2026-04-01T15:54:14.203Z",
+          product_expiry_date: null,
+          product_active: true
+        }
+      })
+
+Argument `product_min_quantity`: Invalid value provided. Expected Int or IntFieldUpdateOperationsInput, provided String.
+2026-04-01 13:44:51 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:28:34
+
+  25   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  26 };
+  27 
+→ 28 return (await prisma.product.create({
+       data: {
+         product_name: "t",
+         product_sap_code: "333",
+         product_category: 2,
+         product_quantity: 10,
+         product_min_quantity: 10,
+         product_unit_val: 22.55,
+         product_location: null,
+         product_total_val: 225.5,
+         product_expiry_date: null,
+     +   product_lot: String
+       }
+     })
+
+Argument `product_lot` is missing.
+2026-04-01 13:48:18 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:28:34
+
+  25   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  26 };
+  27 
+→ 28 return (await prisma.product.create({
+       data: {
+         product_name: "a",
+         product_sap_code: "222",
+         product_category: 2,
+         product_quantity: 20,
+         product_min_quantity: 20,
+         product_unit_val: 222.13,
+         product_location: null,
+         product_total_val: 4442.6,
+         product_expiry_date: null,
+     +   product_lot: String
+       }
+     })
+
+Argument `product_lot` is missing.
+2026-04-01 14:05:51 [error]: [CONTROLLER] Erro na transação: Tipo de transação inválido: undefined
+2026-04-01 14:05:59 [error]: [CONTROLLER] Erro na transação: Tipo de transação inválido: undefined
+2026-04-01 14:20:43 [error]: [CONTROLLER] Erro na transação: 
+Invalid `tx.transaction.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\services\TransactionService.ts:53:48
+
+  50   totalAmount += quantity * unitPrice;
+  51 }
+  52 
+→ 53 const transaction = await tx.transaction.create(
+Foreign key constraint violated on the foreign key

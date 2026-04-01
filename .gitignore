@@ -6,4 +6,7 @@ service-host/dev.db
 service-host/dev.db-journal
 front-end/node_modules/
 front-end/dist/
+front-end/.env*
+.DS_Store
+*.log
 

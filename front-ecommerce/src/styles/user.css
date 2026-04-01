@@ -1,0 +1,15 @@
+/* Classe para limpar qualquer rastro de fundo, borda ou sombra */
+.btn-invisible-important {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    background: none !important;
+    padding: 0 !important;
+}
+
+/* Opcional: Um efeito de escala ou cor no ícone ao passar o mouse */
+.btn-invisible-important:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important; /* Um leve reflexo ao encostar */
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}

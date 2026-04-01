@@ -1,0 +1,242 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Santa Casa E-commerce API",
+    "description": "API Profissional de Gestão Hospitalar e Vendas com Controle de Estoque Atômico",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Servidor Local"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "UserIdHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-user-id",
+        "description": "ID do Usuário Logado (Ex: 1 para Admin, 2 para Cliente)"
+      }
+    }
+  },
+  "security": [
+    { "UserIdHeader": [] }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Realiza o login",
+        "tags": ["Autenticação"],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "admin@santacasa.com" },
+                  "password": { "type": "string", "example": "admin123" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login realizado com sucesso" },
+          "401": { "description": "Credenciais inválidas" }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "summary": "Lista clientes (Paginado)",
+        "tags": ["Clientes"],
+        "parameters": [
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 10 } },
+          { "name": "customer_name", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Sucesso" } }
+      },
+      "post": {
+        "summary": "Cria um novo cliente",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_name": { "type": "string", "example": "Joana Cliente" },
+                  "customer_email": { "type": "string", "example": "joana@email.com" },
+                  "customer_tax_id": { "type": "string", "example": "111.222.333-44" },
+                  "customer_city": { "type": "string", "example": "São Paulo" },
+                  "customer_state": { "type": "string", "example": "SP" },
+                  "customer_password": { "type": "string", "example": "senha123" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Criado com sucesso" } }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "summary": "Busca um cliente pelo ID",
+        "tags": ["Clientes"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "responses": { "200": { "description": "Sucesso" }, "404": { "description": "Não encontrado" } }
+      },
+      "patch": {
+        "summary": "Atualiza os dados de um cliente",
+        "tags": ["Clientes"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer_name": { "type": "string", "example": "Joana Cliente Atualizada" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Atualizado com sucesso" } }
+      },
+      "delete": {
+        "summary": "Deleta um cliente",
+        "tags": ["Clientes"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "responses": { "204": { "description": "Deletado com sucesso" } }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Lista produtos (Paginado)",
+        "tags": ["Produtos"],
+        "parameters": [
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 10 } },
+          { "name": "product_name", "in": "query", "schema": { "type": "string" } },
+          { "name": "product_category", "in": "query", "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Sucesso" } }
+      },
+      "post": {
+        "summary": "Cadastra um novo produto/medicamento",
+        "tags": ["Produtos"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_sap_code": { "type": "string", "example": "SAP-DIP-500" },
+                  "product_name": { "type": "string", "example": "Dipirona 500mg" },
+                  "product_lot": { "type": "string", "example": "LOTE-2024" },
+                  "product_quantity": { "type": "integer", "example": 100 },
+                  "product_unit_val": { "type": "number", "example": 15.50 },
+                  "product_category": { "type": "integer", "example": 1 }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Produto criado" } }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Busca um produto pelo ID",
+        "tags": ["Produtos"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "responses": { "200": { "description": "Sucesso" }, "404": { "description": "Não encontrado" } }
+      },
+      "patch": {
+        "summary": "Atualiza estoque, valor ou dados do produto",
+        "tags": ["Produtos"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_quantity": { "type": "integer", "example": 150 },
+                  "product_unit_val": { "type": "number", "example": 16.00 }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Atualizado com sucesso" } }
+      },
+      "delete": {
+        "summary": "Deleta um produto",
+        "tags": ["Produtos"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "responses": { "204": { "description": "Deletado com sucesso" } }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Lista histórico de transações e vendas (Paginado)",
+        "tags": ["Transações"],
+        "parameters": [
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 10 } },
+          { "name": "type", "in": "query", "description": "1 = Entrada, 2 = Saída", "schema": { "type": "integer" } },
+          { "name": "customer_id", "in": "query", "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Sucesso" } }
+      },
+      "post": {
+        "summary": "Cria uma nova Venda (Saída) ou Compra (Entrada)",
+        "tags": ["Transações"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "integer", "example": 2, "description": "1 = Entrada, 2 = Saída" },
+                  "customer_id": { "type": "integer", "example": 1 },
+                  "description": { "type": "string", "example": "Venda via E-commerce" },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "product_id": { "type": "integer", "example": 1 },
+                        "quantity": { "type": "integer", "example": 2 },
+                        "unit_price": { "type": "number", "example": 15.50 }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Transação processada com sucesso" }, "400": { "description": "Estoque insuficiente" } }
+      }
+    },
+    "/transactions/{id}": {
+      "get": {
+        "summary": "Busca detalhes de uma transação pelo ID",
+        "tags": ["Transações"],
+        "parameters": [ { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } } ],
+        "responses": { "200": { "description": "Sucesso" }, "404": { "description": "Não encontrado" } }
+      }
+    }
+  }
+}

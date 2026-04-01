@@ -3,9 +3,9 @@ import {
   IGetCustomerParams,
   IPostCustomerBase,
   IPatchCustomerParams,
-  GetCustomerParamsKeys,
   PostCustomerKeys,
 } from "../interfaces/Customer/CustomerDTOs.js";
+import { IPaginatedResponse } from "../interfaces/PaginationDTOs.js";
 import { prisma } from "../lib/prisma.js";
 import { Customer, CustomerKeys } from "../models/Customer.js";
 import { logger } from "../utils/Logger.js";
@@ -18,11 +18,7 @@ export class CustomerRepository {
   }
 
   async createCustomer(data: IPostCustomerBase): Promise<Customer> {
-    // 1. Usamos a Factory para preparar o objeto (regras de PF/PJ)
-    // Passamos '0' ou null no ID pois o SQLite gerará o autoincrement
     const customerData = this.factory.create(0, data);
-
-    // 2. Removemos o ID temporário para o Prisma não tentar inserir manualmente
     const { [CustomerKeys.ID]: _, ...dataToSave } = customerData;
 
     return (await prisma.customer.create({
@@ -30,31 +26,50 @@ export class CustomerRepository {
     })) as unknown as Customer;
   }
 
-  async findAll(params: IGetCustomerParams): Promise<Customer[]> {
+  async findAll(
+    params: IGetCustomerParams,
+  ): Promise<IPaginatedResponse<Customer>> {
     const where: any = {};
 
-    // 1. Mapeamento dos filtros
+    const page = Number(params.page) || 1;
+    const limit = Number(params.limit) || 10;
+    const skip = (page - 1) * limit;
+
     Object.entries(params).forEach(([key, value]) => {
-      // Só adiciona se o valor não for null, undefined ou string vazia
-      if (value !== undefined && value !== null && value !== "") {
+      if (
+        value !== undefined &&
+        value !== null &&
+        value !== "" &&
+        key !== "page" &&
+        key !== "limit"
+      ) {
         if (key === PostCustomerKeys.NAME) {
-          // Busca parcial (LIKE %valor%)
           where[key] = { contains: String(value) };
         } else {
-          // Busca exata para o resto (ID, City, TaxId, etc)
           where[key] = value;
         }
       }
     });
 
     try {
-      // 2. Executa a busca com o objeto 'where' montado
-      // Atenção: Confirme se é .customer ou .customers (plural)
-      const results = await prisma.customer.findMany({
-        where: where,
-      });
+      const [data, total] = await prisma.$transaction([
+        prisma.customer.findMany({
+          where: where,
+          skip: skip,
+          take: limit,
+        }),
+        prisma.customer.count({ where: where }),
+      ]);
 
-      return results as unknown as Customer[];
+      return {
+        data: data as unknown as Customer[],
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
     } catch (error: any) {
       logger.error(`[REPOSITORY] Erro ao buscar no banco: ${error.message}`);
       throw error;
@@ -71,7 +86,7 @@ export class CustomerRepository {
         data: data as any,
       })) as unknown as Customer;
     } catch (error) {
-      return null; // Se o ID não existir, o Prisma lança erro; capturamos e retornamos null
+      return null;
     }
   }
 

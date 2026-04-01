@@ -3,3 +3,131 @@
 2026-03-31 09:48:25 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '63398007092' inválido.
 2026-03-31 09:59:19 [error]: [UPDATE] Erro na atualização do ID 3: Cliente não encontrado para atualização.
 2026-03-31 09:59:49 [error]: [REMOVE] Erro ao excluir cliente 999: Não foi possível excluir: Cliente inexistente.
+2026-03-31 16:54:42 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:27:34
+
+  24   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  25 };
+  26 
+→ 27 return (await prisma.product.create({
+       data: {
+         product_sap_code: "SAP-MED-001",
+         product_name: "Dipirona 500mg",
+         product_lot: "LOTE2024-X",
+         product_quantity: 100,
+         product_unit_val: 2.5,
+         product_category: 1,
+                           ~
+         product_expiry_date: new Date("2027-12-31T00:00:00.000Z"),
+         product_min_quantity: 15,
+         product_location: 4,
+         product_total_val: 250
+       }
+     })
+
+Argument `product_category`: Invalid value provided. Expected String, provided Int.
+2026-03-31 16:57:19 [error]: [CONTROLLER] Erro ao criar produto: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:27:34
+
+  24   [ProductKeys.EXPIRY_DATE]: expiryDate,
+  25 };
+  26 
+→ 27 return (await prisma.product.create({
+       data: {
+         product_sap_code: "SAP-MED-001",
+         product_name: "Dipirona 500mg",
+         product_lot: "LOTE2024-X",
+         product_quantity: 100,
+         product_unit_val: 2.5,
+         product_category: 1,
+                           ~
+         product_expiry_date: new Date("2027-12-31T00:00:00.000Z"),
+         product_min_quantity: 15,
+         product_location: 4,
+         product_total_val: 250
+       }
+     })
+
+Argument `product_category`: Invalid value provided. Expected String, provided Int.
+2026-03-31 17:02:02 [error]: [CONTROLLER] Erro ao criar produto: Validade retroativa não permitida.
+2026-03-31 17:02:34 [error]: [CONTROLLER] Erro ao listar produtos: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\ProductRepository.ts:45:34
+
+  42   }
+  43 });
+  44 
+→ 45 return (await prisma.product.findMany({
+       where: {
+         product_category: "1"
+                           ~~~
+       },
+       orderBy: {
+         product_name: "asc"
+       }
+     })
+
+Argument `product_category`: Invalid value provided. Expected IntFilter or Int, provided String.
+2026-03-31 19:53:18 [error]: [REPOSITORY] Erro ao buscar no banco: 
+Invalid `prisma.customer.findMany()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\CustomerRepository.ts:42:45
+
+  39 });
+  40 
+  41 try {
+→ 42   const results = await prisma.customer.findMany({
+         where: {
+           page: "1",
+           ~~~~
+           limit: "10",
+       ?   AND?: CustomerWhereInput | CustomerWhereInput[],
+       ?   OR?: CustomerWhereInput[],
+       ?   NOT?: CustomerWhereInput | CustomerWhereInput[],
+       ?   customer_id?: IntFilter | Int,
+       ?   customer_name?: StringFilter | String,
+       ?   customer_email?: StringFilter | String,
+       ?   customer_tax_id?: StringFilter | String,
+       ?   customer_registration_date?: DateTimeFilter | DateTime,
+       ?   customer_city?: StringFilter | String,
+       ?   customer_state?: StringFilter | String,
+       ?   customer_state_registration?: StringNullableFilter | String | Null,
+       ?   customer_municipal_registration?: StringNullableFilter | String | Null,
+       ?   transactions?: TransactionListRelationFilter
+         }
+       })
+
+Unknown argument `page`. Available options are marked with ?.
+2026-03-31 19:53:18 [error]: [LIST] Erro ao listar clientes: 
+Invalid `prisma.customer.findMany()` invocation in
+C:\Users\wallace\Desktop\projetos\Santa Casa\service-host\src\repositories\CustomerRepository.ts:42:45
+
+  39 });
+  40 
+  41 try {
+→ 42   const results = await prisma.customer.findMany({
+         where: {
+           page: "1",
+           ~~~~
+           limit: "10",
+       ?   AND?: CustomerWhereInput | CustomerWhereInput[],
+       ?   OR?: CustomerWhereInput[],
+       ?   NOT?: CustomerWhereInput | CustomerWhereInput[],
+       ?   customer_id?: IntFilter | Int,
+       ?   customer_name?: StringFilter | String,
+       ?   customer_email?: StringFilter | String,
+       ?   customer_tax_id?: StringFilter | String,
+       ?   customer_registration_date?: DateTimeFilter | DateTime,
+       ?   customer_city?: StringFilter | String,
+       ?   customer_state?: StringFilter | String,
+       ?   customer_state_registration?: StringNullableFilter | String | Null,
+       ?   customer_municipal_registration?: StringNullableFilter | String | Null,
+       ?   transactions?: TransactionListRelationFilter
+         }
+       })
+
+Unknown argument `page`. Available options are marked with ?.
+2026-03-31 19:56:10 [error]: [CREATE] Falha ao criar cliente: Documento (CPF/CNPJ) '11122233344' inválido.
+2026-03-31 19:57:10 [error]: [CONTROLLER] Erro ao criar produto: O Código SAP SAP-DIP-500 já está cadastrado.
+2026-03-31 19:58:02 [error]: [CONTROLLER] Erro na transação: Produto ID 1 não encontrado.

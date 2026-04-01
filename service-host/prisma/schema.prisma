@@ -7,15 +7,78 @@ datasource db {
 }
 
 model Customer {
-  customer_id                     Int      @id @default(autoincrement()) @map("customer_id")
-  customer_name                   String   @map("customer_name")
-  customer_email                  String   @unique @map("customer_email")
-  customer_tax_id                 String   @unique @map("customer_tax_id")
-  customer_registration_date      DateTime @default(now()) @map("customer_registration_date")
-  customer_city                   String   @map("customer_city")
-  customer_state                  String   @map("customer_state")
-  customer_state_registration     String?  @map("customer_state_registration")
+  customer_id                   Int      @id @default(autoincrement()) @map("customer_id")
+  customer_name                 String   @map("customer_name")
+  customer_email                String   @unique @map("customer_email")
+  customer_tax_id               String   @unique @map("customer_tax_id")
+  customer_registration_date    DateTime @default(now()) @map("customer_registration_date")
+  customer_city                 String   @map("customer_city")
+  customer_state                String   @map("customer_state")
+  customer_state_registration   String?  @map("customer_state_registration")
   customer_municipal_registration String?  @map("customer_municipal_registration")
+  transactions                  Transaction[] 
 
   @@map("customers")
+}
+
+model Product {
+  product_id            Int      @id @default(autoincrement())
+  product_sap_code      String   @unique
+  product_name          String
+  product_lot           String
+  product_quantity      Int      @default(0)
+  product_min_quantity  Int      @default(5)
+  product_unit_val      Decimal
+  product_total_val     Decimal
+  product_unit_weight   Float?
+  product_category      Int      
+  product_location      Int?     
+
+  product_entry_date    DateTime @default(now())
+  product_expiry_date   DateTime?
+  product_active        Boolean  @default(true)
+  transaction_items     TransactionItem[]
+
+  @@index([product_sap_code]) 
+  @@index([product_name]) 
+  @@index([product_category, product_active])
+
+  @@unique([product_sap_code, product_lot]) 
+
+  @@map("products")
+}
+
+model Transaction {
+  id                 Int               @id @default(autoincrement())
+  type               Int               
+  description        String?
+  total_amount       Decimal
+  created_at         DateTime          @default(now())
+  customer_id        Int?                
+  customer           Customer?         @relation(fields: [customer_id], references: [customer_id])
+  items              TransactionItem[]
+
+  @@index([created_at, type]) 
+  @@index([customer_id])
+  
+  @@map("transactions")
+}
+
+model TransactionItem {
+  id              Int     @id @default(autoincrement())
+  transaction_id  Int
+  product_id      Int
+  quantity        Int
+  unit_price      Decimal
+  subtotal        Decimal
+  
+  transaction     Transaction @relation(fields: [transaction_id], references: [id])
+  product         Product     @relation(fields: [product_id], references: [product_id])
+
+  @@index([transaction_id])
+  @@index([product_id]) 
+  
+  @@unique([transaction_id, product_id]) 
+
+  @@map("transaction_items")
 }

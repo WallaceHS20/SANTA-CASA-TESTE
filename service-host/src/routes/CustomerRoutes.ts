@@ -4,7 +4,6 @@ import { CustomerController } from "../controllers/CustomerController.js";
 const customerRoutes = Router();
 const customerController = new CustomerController();
 
-// ✅ CORRETO: Passe a requisição inteira, não só o corpo
 customerRoutes.post("/", (req, res) => customerController.createCustomer(req, res));
 
 customerRoutes.get("/", (req, res) => customerController.list(req, res));

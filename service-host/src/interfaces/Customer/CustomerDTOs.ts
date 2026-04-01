@@ -1,3 +1,5 @@
+import { IPaginationParams } from "../PaginationDTOs.js";
+
 export enum PostCustomerKeys {
   NAME = "customer_name",
   EMAIL = "customer_email",
@@ -35,7 +37,7 @@ export enum GetCustomerParamsKeys {
   MUNICIPAL_REGISTRATION = "customer_municipal_registration",
 }
 
-export interface IGetCustomerParams {
+export interface IGetCustomerParams extends IPaginationParams{
   [GetCustomerParamsKeys.ID]?: string;
   [GetCustomerParamsKeys.NAME]?: string;
   [GetCustomerParamsKeys.EMAIL]?: string;

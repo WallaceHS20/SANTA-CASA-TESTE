@@ -7,23 +7,23 @@ O **E-Pharma** é uma plataforma integrada de e-commerce e gestão de suprimento
 ## 🛠️ Tecnologias e Stack
 
 ### **Frontend**
-* **React + Vite** | **TypeScript**
-* **PrimeReact** & **PrimeFlex** (UI/UX de alta performance)
-* **Context API** (Gerenciamento de Autenticação e Notificações)
+- **React + Vite** | **TypeScript**
+- **PrimeReact** & **PrimeFlex** (UI/UX de alta performance)
+- **Context API** (Gerenciamento de Autenticação e Notificações)
 
 ### **Backend**
-* **Node.js** | **Prisma ORM**
-* **SQLite (LibSQL)** (Banco de dados ágil e local)
-* **TSX** (Execução direta de TypeScript em ambiente de desenvolvimento)
-* **Docker** (Containerização completa do ecossistema)
+- **Node.js** | **Prisma ORM**
+- **SQLite (LibSQL)** (Banco de dados ágil e local)
+- **TSX** (Execução direta de TypeScript em ambiente de desenvolvimento)
+- **Docker** (Containerização completa do ecossistema)
 
 ---
 
 ## 🏗️ Padrões de Projeto (Design Patterns)
 
-* **Backend:** Repository Pattern, Service Layer e Strategy/Factory para motores de transação (distinção entre Compras e Remessas).
-* **Frontend:** Custom Hooks (Abstração de Lógica), Service Layer (Axios) e Modal Factory Pattern.
-* **Segurança:** RBAC (Role Based Access Control) com proteção de rotas via componente `ProtectedRoute` e filtragem de menus por permissão.
+- **Backend:** Repository Pattern, Service Layer e Strategy/Factory para motores de transação (distinção entre Compras e Remessas).
+- **Frontend:** Custom Hooks (Abstração de Lógica), Service Layer (Axios) e Modal Factory Pattern.
+- **Segurança:** RBAC (Role Based Access Control) com proteção de rotas via componente `ProtectedRoute` e filtragem de menus por permissão.
 
 ---
 
@@ -31,10 +31,10 @@ O **E-Pharma** é uma plataforma integrada de e-commerce e gestão de suprimento
 
 O sistema já sobe com dados de teste populados para os dois perfis de acesso:
 
-| Perfil | E-mail | Senha | ID | Instituição |
-| :--- | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@santacasa.org.br` | `admin123` | `1` | Hospital Central Santa Casa |
-| **Cliente** | `estoque@farmapopular.com.br` | `user123` | `2` | Rede de Farmácias Popular |
+| Perfil   | E-mail                          | Senha    | ID | Instituição                     |
+|----------|--------------------------------|----------|----|---------------------------------|
+| **Admin**   | `admin@santacasa.org.br`        | `admin123` | 1  | Hospital Central Santa Casa     |
+| **Cliente** | `estoque@farmapopular.com.br`  | `user123`  | 2  | Rede de Farmácias Popular       |
 
 ---
 
@@ -44,38 +44,45 @@ Certifique-se de ter o Docker instalado e, na raiz do projeto (onde está o `doc
 
 ```bash
 docker compose up --build
+```
 
 ---
 
 ## 🚀 Como Rodar o Projeto Manual
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone [https://github.com/seu-usuario/santa-casa.git](https://github.com/seu-usuario/santa-casa.git)
-    cd santa-casa
-    ```
+1. **Clone o repositório:**
+```bash
+git clone https://github.com/seu-usuario/santa-casa.git
+cd santa-casa
+```
 
-2.  **Após acessar entre:**
-    cd service-host
-    npm install
+2. **Backend:**
+```bash
+cd service-host
+npm install
 
-    # Prepara o banco de dados e popula os dados
-    npx prisma migrate dev --name init_setup
-    npx prisma db seed
+# Prepara o banco de dados e popula os dados
+npx prisma migrate dev --name init_setup
+npx prisma db seed
 
-    # Inicia o servidor
-    npx tsx server.ts
-    ```
+# Inicia o servidor
+npx tsx server.ts
+```
 
-    # Acesse o front
-    cd front-ecommerce
-    npm install
-    npm run dev
-
-3.  **Acesse as aplicações:**
-    * **Frontend:** [http://localhost:5173](http://localhost:5173)
-    * **Backend:** [http://localhost:3000](http://localhost:3000)
-
-> **Nota:** Durante a inicialização, o Docker executará automaticamente o script `entrypoint.sh`, que realiza as migrações do banco e o **Seed** dos dados (Clientes, Produtos e Histórico de Transações).
+3. **Frontend:**
+```bash
+cd front-ecommerce
+npm install
+npm run dev
+```
 
 ---
+
+## 🌐 Acesso às aplicações
+
+- **Frontend:** http://localhost:5173  
+- **Backend:** http://localhost:3000  
+
+---
+
+> **Nota:** Durante a inicialização, o Docker executará automaticamente o script `entrypoint.sh`, que realiza as migrações do banco e o **seed** dos dados (Clientes, Produtos e Histórico de Transações).

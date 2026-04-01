@@ -11,6 +11,7 @@ import {
   type IGetProductResponse,
 } from "@/Interfaces/Products";
 import { Tag } from "primereact/tag";
+import { UserRole } from "@/Interfaces/Auth";
 
 interface ProductCardViewProps {
   products: IGetProductResponse[];
@@ -107,6 +108,7 @@ export const ProductCardView = ({
 
                   <div className="d-flex gap-2">
                     <Button
+                      permission={[UserRole.ADMIN]}
                       icon={ButtonIcon.EDIT}
                       variant={ButtonVariant.GHOST}
                       severity={ButtonSeverity.INFO}
